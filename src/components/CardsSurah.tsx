@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { title } from "process";
+import { htmlParser } from "@/helpers";
 
 type Props = {
   number: number;
@@ -34,7 +35,7 @@ const CardsSurah = (props: Props) => {
             props.desc.length > 100 ? "truncate " : ""
           }`}
         >
-          {props.desc.replace(/<[^>]*>?/gm, "")}
+          {htmlParser(props.desc)}
         </p>
         <a href='#' className='text-blue-500 inline-flex items-center mt-4'>
           Read More
