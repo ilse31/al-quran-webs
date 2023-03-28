@@ -67,13 +67,29 @@ interface Props {
 
 // Component provider untuk favorites context
 export const FavoritesProvider: React.FC<Props> = ({ children }) => {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      console.log("You are on the browser");
+      // 👉️ can use localStorage here
+
+      localStorage.setItem("name", "Tom");
+
+      console.log(localStorage.getItem("name")); // 👉️ "Tom"
+    } else {
+      console.log("You are on the server");
+      // 👉️ can't use localStorage
+    }
+  }, []);
   const [state, dispatch] = useReducer(favoritesReducer, initialState, () => {
     // Ambil data favorites dari local storage saat pertama kali rendering
-    const favorites = localStorage.getItem("favorites");
-    return favorites ? { favorites: JSON.parse(favorites) } : initialState;
+    if (typeof window !== "undefined") {
+      const favorites = localStorage.getItem("favorites");
+      return favorites ? { favorites: JSON.parse(favorites) } : initialState;
+    } else {
+      return initialState;
+    }
   });
 
-  // Simpan data favorites ke local storage setiap kali terjadi perubahan pada state
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(state.favorites));
   }, [state]);

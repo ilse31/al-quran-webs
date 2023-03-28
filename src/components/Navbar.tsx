@@ -1,4 +1,4 @@
-import { NavbarData } from "@/constants/navbar";
+import { AnimationNavbarData, NavbarData } from "@/constants/navbar";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 const Navbar = () => {
   const router = useRouter();
+
   const isActive = (r: string) => {
     if (r === router.pathname) {
       return "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium";
@@ -16,22 +17,7 @@ const Navbar = () => {
       return "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium";
     }
   };
-  const menuVariants = {
-    open: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.4,
-      },
-    },
-    closed: {
-      opacity: 0,
-      y: "-100%",
-      transition: {
-        duration: 0.4,
-      },
-    },
-  };
+
   const [isShow, setIsShow] = useState(false);
 
   return (
@@ -84,7 +70,7 @@ const Navbar = () => {
       <motion.div
         className={`sm:hidden  ${isShow ? "block" : "hidden"}`}
         id='mobile-menu'
-        variants={menuVariants}
+        variants={AnimationNavbarData}
         initial='closed'
         animate={isShow ? "open" : "closed"}
       >
