@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { AiFillBook } from "react-icons/ai";
 import { useState } from "react";
+import Logo from "@/assets/logo.png";
+import Image from "next/image";
 import Link from "next/link";
 const Navbar = () => {
   const router = useRouter();
@@ -38,8 +40,20 @@ const Navbar = () => {
         <div className='flex justify-between h-16 items-center'>
           <div className='flex'>
             <div className='flex-shrink-0 flex items-center'>
-              <AiFillBook className='block lg:hidden h-8 w-auto' />
-              <AiFillBook className='hidden lg:block h-8 w-auto' />
+              <Image
+                className='block lg:hidden h-8 w-auto'
+                src={Logo}
+                alt='logo'
+                width={40}
+                height={40}
+              />
+              <Image
+                className='hidden lg:block h-8 w-auto'
+                src={Logo}
+                alt='logo'
+                width={40}
+                height={40}
+              />
             </div>
             <div className='hidden sm:ml-6 sm:flex sm:space-x-8 items-center'>
               {NavbarData.map((item, index) => (
