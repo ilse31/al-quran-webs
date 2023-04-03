@@ -10,10 +10,10 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   req = req.method === "GET" ? req : req.body;
-  const { id } = req.query;
+  const { nomor } = req.query;
   try {
     const data = await fetch(
-      `https://quran-api.santrikoding.com/api/surah/${id}`
+      `https://quran-api.santrikoding.com/api/surah/${nomor}`
     );
     const json = await data.json();
     res.status(200).json(json);

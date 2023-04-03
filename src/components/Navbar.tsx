@@ -2,7 +2,6 @@ import { AnimationNavbarData, NavbarData } from "@/constants/navbar";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { AiFillBook } from "react-icons/ai";
 import { useState } from "react";
 import Logo from "@/assets/logo.png";
 import Image from "next/image";
@@ -18,7 +17,7 @@ const Navbar = () => {
     }
   };
 
-  const [isShow, setIsShow] = useState(false);
+  const [isShow, setIsShow] = useState<boolean>(false);
 
   return (
     <nav className='bg-gray-800'>

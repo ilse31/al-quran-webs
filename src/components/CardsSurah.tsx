@@ -1,8 +1,7 @@
 import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { title } from "process";
 import { htmlParser } from "@/helpers";
+import Link from "next/link";
 
 type Props = {
   number: number;
@@ -37,9 +36,12 @@ const CardsSurah = (props: Props) => {
         >
           {htmlParser(props.desc)}
         </p>
-        <a href='#' className='text-blue-500 inline-flex items-center mt-4'>
+        <Link
+          href={`quran/${props.number}`}
+          className='text-blue-500 inline-flex items-center mt-4'
+        >
           Read More
-        </a>
+        </Link>
       </div>
     </motion.div>
   );
