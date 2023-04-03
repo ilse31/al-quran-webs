@@ -31,12 +31,13 @@ const Surah = ({ dataSurah }: Props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const response = await api.get("/quran/");
+  const response = await api.get("quran");
   const dataSurah: Quran[] = response.data;
   return {
     props: {
       dataSurah,
     },
+    revalidate: 3600, //
   };
 };
 

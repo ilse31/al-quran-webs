@@ -10,7 +10,7 @@ type Props = {
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   try {
-    const response = await api.get("/surah");
+    const response = await api.get("quran");
     const surahs: ListSurah[] = response.data;
 
     if (!Array.isArray(surahs)) {
@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   }
   const { nomor } = params;
   try {
-    const response = await api.get(`/quran/${nomor}`);
+    const response = await api.get(`quran/${nomor}`);
     const detail: DetailSurah = response.data;
     return {
       props: {
