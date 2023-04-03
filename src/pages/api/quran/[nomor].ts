@@ -12,13 +12,12 @@ export default async function handler(
   req = req.method === "GET" ? req : req.body;
   const { nomor } = req.query;
   try {
-    const data = await fetch(
-      `https://quran-api.santrikoding.com/api/surah/${nomor}`
-    );
+    let url: any = process.env.API_URL_SURAH_DEV;
+    const data = await fetch(`${url}/${nomor}`);
     const json = await data.json();
     res.status(200).json(json);
   } catch (error) {
     console.error(error);
-    res.status(500); // Internal Server Error
+    res.status(500);
   }
 }

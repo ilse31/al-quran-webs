@@ -11,7 +11,8 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   try {
-    const data = await fetch("https://quran-api.santrikoding.com/api/surah");
+    let url: any = process.env.API_URL_SURAH_DEV;
+    const data = await fetch(url);
     const json = await data.json();
     res.status(200).json(json);
   } catch (error) {
