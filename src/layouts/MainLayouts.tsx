@@ -13,8 +13,11 @@ const MainLayouts = (props: Props) => {
   return (
     <motion.div className='bg-white w-full min-h-screen font-poppins'>
       <Head>
-        <title>{props.title ? props.title : ""}</title>
-        <meta name='description' content={`${props.desc ? props.desc : ""} `} />
+        <title>{props.title ? props.title : "Ayo Ibadah"}</title>
+        <meta
+          name='description'
+          content={`${props.desc ? props.desc : "Ayo Ibadah"} `}
+        />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
