@@ -70,11 +70,7 @@ export const FavoritesProvider: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       console.log("You are on the browser");
-      // 👉️ can use localStorage here
-
-      localStorage.setItem("name", "Tom");
-
-      console.log(localStorage.getItem("name")); // 👉️ "Tom"
+      console.log(localStorage.getItem("name"));
     } else {
       console.log("You are on the server");
       // 👉️ can't use localStorage

@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import React from "react";
 import MainLayouts from "@/layouts/MainLayouts";
 import { DetailSurah, ListSurah, Params } from "@/types/DetailSurah";
+import Slider from "react-slick";
 
 type Props = {
   detail?: DetailSurah;
@@ -55,7 +56,7 @@ const DetailSurahPages = ({ detail }: Props) => {
 
   return (
     <MainLayouts>
-      <div className='min-w-6xl gap-x-5'>
+      <div className='bg-emerald-600'>
         <h1>{detail.nama}</h1>
         <p>{detail.jumlah_ayat}</p>
       </div>

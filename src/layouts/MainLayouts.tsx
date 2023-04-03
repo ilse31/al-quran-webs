@@ -28,7 +28,7 @@ const MainLayouts = (props: Props) => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className='flex p-5 max-w-7xl mx-auto'>{props.children}</div>
+        {props.children}
       </motion.main>
 
       {/* Footer */}

@@ -9,6 +9,10 @@ import Link from "next/link";
 const Navbar = () => {
   const router = useRouter();
 
+
+
+  
+
   const isActive = (r: string) => {
     if (r === router.pathname) {
       return "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium";
@@ -21,7 +25,7 @@ const Navbar = () => {
 
   return (
     <nav className='bg-gray-800'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 md:mb-5'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 '>
         <div className='flex justify-between h-16 items-center'>
           <div className='flex'>
             <div className='flex-shrink-0 flex items-center'>

@@ -12,19 +12,21 @@ type Props = {
 const Surah = ({ dataSurah }: Props) => {
   return (
     <MainLayouts desc='Ayo Baca Quran' title='Ayo Ibadah || Baca Al-Quran'>
-      <div className='flex gap-3 flex-row flex-wrap justify-center'>
-        {dataSurah.map((surah) => (
-          <div key={surah.nomor}>
-            <CardsSurah
-              arti={surah.arti}
-              nama_latin={surah.nama_latin}
-              number={surah.nomor}
-              title={surah.nama}
-              totalAyat={surah.jumlah_ayat}
-              desc={surah.deskripsi}
-            />
-          </div>
-        ))}
+      <div className='flex p-5 max-w-7xl mx-auto'>
+        <div className='flex gap-3 flex-row flex-wrap justify-center'>
+          {dataSurah.map((surah) => (
+            <div key={surah.nomor}>
+              <CardsSurah
+                arti={surah.arti}
+                nama_latin={surah.nama_latin}
+                number={surah.nomor}
+                title={surah.nama}
+                totalAyat={surah.jumlah_ayat}
+                desc={surah.deskripsi}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </MainLayouts>
   );
