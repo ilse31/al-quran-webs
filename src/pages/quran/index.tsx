@@ -1,36 +1,27 @@
 import { CardsSurah } from "@/components";
 import MainLayouts from "@/layouts/MainLayouts";
 import api from "@/service/api";
+import { Quran } from "@/types/DataQuran";
 import { GetStaticProps } from "next";
 import React from "react";
 
-type Post = {
-  nomor: number;
-  nama: string;
-  nama_latin: string;
-  jumlah_ayat: number;
-  tempat_turun: string;
-  arti: string;
-  deskripsi: string;
-};
-
 type Props = {
-  posts: Post[];
+  dataSurah: Quran[];
 };
 
-const Surah = ({ posts }: Props) => {
+const Surah = ({ dataSurah }: Props) => {
   return (
     <MainLayouts desc='Ayo Baca Quran' title='Ayo Ibadah || Baca Al-Quran'>
       <div className='flex gap-3 flex-row flex-wrap justify-center'>
-        {posts.map((post) => (
-          <div key={post.nomor}>
+        {dataSurah.map((surah) => (
+          <div key={surah.nomor}>
             <CardsSurah
-              arti={post.arti}
-              nama_latin={post.nama_latin}
-              number={post.nomor}
-              title={post.nama}
-              totalAyat={post.jumlah_ayat}
-              desc={post.deskripsi}
+              arti={surah.arti}
+              nama_latin={surah.nama_latin}
+              number={surah.nomor}
+              title={surah.nama}
+              totalAyat={surah.jumlah_ayat}
+              desc={surah.deskripsi}
             />
           </div>
         ))}
@@ -41,10 +32,10 @@ const Surah = ({ posts }: Props) => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const response = await api.get("/quran/");
-  const posts: Post[] = response.data;
+  const dataSurah: Quran[] = response.data;
   return {
     props: {
-      posts,
+      dataSurah,
     },
   };
 };

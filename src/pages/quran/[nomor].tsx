@@ -1,27 +1,12 @@
 import api from "@/service/api";
 import { GetStaticPaths, GetStaticProps } from "next";
-import axios from "axios";
-import { ParsedUrlQuery } from "querystring";
 import React from "react";
 import MainLayouts from "@/layouts/MainLayouts";
-
-type ListSurah = {
-  nomor: number;
-};
-
-type DetailSurah = {
-  nomor: number;
-  nama: string;
-  jumlah_ayat: number;
-};
+import { DetailSurah, ListSurah, Params } from "@/types/DetailSurah";
 
 type Props = {
   detail?: DetailSurah;
 };
-
-interface Params extends ParsedUrlQuery {
-  nomor: any;
-}
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   try {
