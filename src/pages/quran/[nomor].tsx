@@ -1,9 +1,9 @@
 import api from "@/service/api";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
 import axios from "axios";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
+import MainLayouts from "@/layouts/MainLayouts";
 
 type ListSurah = {
   nomor: number;
@@ -71,12 +71,12 @@ const DetailSurahPages = ({ detail }: Props) => {
   }
 
   return (
-    <div>
-      DetailSurahPages
-      <div>
-        <h1>{detail?.nama}</h1>
+    <MainLayouts>
+      <div className='min-w-6xl gap-x-5'>
+        <h1>{detail.nama}</h1>
+        <p>{detail.jumlah_ayat}</p>
       </div>
-    </div>
+    </MainLayouts>
   );
 };
 

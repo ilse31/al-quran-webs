@@ -16,7 +16,7 @@ const MainLayouts = (props: Props) => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {props.children}
+        <div className='flex p-5 max-w-7xl mx-auto'>{props.children}</div>
       </motion.main>
 
       {/* Footer */}
@@ -24,22 +24,10 @@ const MainLayouts = (props: Props) => {
         <div className='max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8'>
           <div className='mt-6 flex justify-center space-x-6'>
             <a
-              href='#'
+              href='https://ilhaampras-porto.vercel.app/'
               className='text-gray-400 hover:text-gray-500 flex flex-row-reverse'
             >
               <span>Ilham Prasetya</span>
-              <svg
-                className='h-6 w-6'
-                fill='currentColor'
-                viewBox='0 0 24 24'
-                aria-hidden='true'
-              >
-                <path
-                  fillRule='evenodd'
-                  d='M12 2a10 10 0 00-3.54 19.54A10.003 10.003 0 002 12 10 10 0 0012 2zm-1.5 15V13h-1v-1.5h1V9.5c0-1.38.56-2.5 2.5-2.5h1.5v1.5h-1c-.83 0-1 .17-1 .83V11h2l-.25 1.5h-1.75V17h-1.5z'
-                  clipRule='evenodd'
-                />
-              </svg>
             </a>
           </div>
           <div className='mt-8 flex justify-center space-x-6'>
