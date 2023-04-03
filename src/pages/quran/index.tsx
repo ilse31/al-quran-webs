@@ -20,7 +20,7 @@ type Props = {
 
 const Surah = ({ posts }: Props) => {
   return (
-    <MainLayouts>
+    <MainLayouts desc='Ayo Baca Quran' title='Ayo Ibadah || Baca Al-Quran'>
       <div className='flex gap-3 flex-row flex-wrap justify-center'>
         {posts.map((post) => (
           <div key={post.nomor}>

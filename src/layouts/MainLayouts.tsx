@@ -1,14 +1,23 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components";
+import Head from "next/head";
 
 type Props = {
   children: React.ReactNode;
+  title?: string;
+  desc?: string;
 };
 
 const MainLayouts = (props: Props) => {
   return (
     <motion.div className='bg-white w-full min-h-screen font-poppins'>
+      <Head>
+        <title>{props.title ? props.title : ""}</title>
+        <meta name='description' content={`${props.desc ? props.desc : ""} `} />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
       <Navbar />
       <motion.main
         initial={{ opacity: 0 }}
