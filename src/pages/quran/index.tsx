@@ -40,7 +40,7 @@ const Surah = ({ posts }: Props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const response = await api.get("/surah");
+  const response = await api.get("/quran/");
   const posts: Post[] = response.data;
   return {
     props: {
