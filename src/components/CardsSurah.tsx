@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { htmlParser } from "@/helpers";
+import { htmlParser } from "@/helpers/ParsingData";
 import Link from "next/link";
 
 type Props = {

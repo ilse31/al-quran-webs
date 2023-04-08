@@ -6,7 +6,7 @@ import { DetailSurah, ListSurah, Params } from "@/types/DetailSurah";
 import Slider from "react-slick";
 import Image from "next/image";
 import Logo from "@/assets/logo.png";
-import { stringToHTML } from "@/helpers";
+import { stringToHTML } from "@/helpers/ParsingData";
 type Props = {
   detail?: DetailSurah;
 };

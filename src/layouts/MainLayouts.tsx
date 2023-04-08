@@ -11,7 +11,7 @@ type Props = {
 
 const MainLayouts = (props: Props) => {
   return (
-    <motion.div className='bg-white w-full min-h-screen font-poppins'>
+    <motion.div className='relative font-poppins'>
       <Head>
         <title>{props.title ? props.title : "Ayo Ibadah"}</title>
         <meta
@@ -23,10 +23,11 @@ const MainLayouts = (props: Props) => {
       </Head>
       <Navbar />
       <motion.main
+        className='bg-white w-full min-h-screen top-[60px] relative'
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 1 }}
       >
         {props.children}
       </motion.main>
