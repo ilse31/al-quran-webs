@@ -7,6 +7,7 @@ import Slider from "react-slick";
 import Image from "next/image";
 import Logo from "@/assets/logo.png";
 import { stringToHTML } from "@/helpers";
+import axios from "axios";
 type Props = {
   detail?: DetailSurah;
 };
@@ -38,7 +39,9 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   }
   const { nomor } = params;
   try {
-    const response = await api.get(`quran/${nomor}`);
+    const response = await axios.get(
+      `https://quran-api.santrikoding.com/api/surah/${nomor}`
+    );
     const detail: DetailSurah = response.data;
     return {
       props: {
