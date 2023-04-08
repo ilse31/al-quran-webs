@@ -2,7 +2,6 @@ import { CardsSurah } from "@/components";
 import MainLayouts from "@/layouts/MainLayouts";
 import api from "@/service/api";
 import { Quran } from "@/types/DataQuran";
-import axios from "axios";
 import { GetStaticProps } from "next";
 import React from "react";
 
@@ -34,9 +33,7 @@ const Surah = ({ dataSurah }: Props) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const response = await axios.get(
-    "https://quran-api.santrikoding.com/api/surah"
-  );
+  const response = await api.get("quran");
   const dataSurah: Quran[] = response.data;
   return {
     props: {
