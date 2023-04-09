@@ -87,15 +87,13 @@ const DetailSurahPages = ({ detail }: Props) => {
 
   const handlePlayAudio = (audios: string) => {
     const audio = new Audio(audios);
+
     if (isPlaying) {
       audio.play();
-    }
-  };
-
-  const handlePauseAudio = (audios: string) => {
-    const audio = new Audio(audios);
-    if (!isPlaying) {
+      setIsPlaying(false);
+    } else {
       audio.pause();
+      setIsPlaying(true);
     }
   };
 
@@ -145,16 +143,11 @@ const DetailSurahPages = ({ detail }: Props) => {
           >
             Previous
           </motion.button>
-          <div className='px-3 py-2 bg-gray-700 rounded-md text-sm'>
-            {isPlaying ? (
-              <button onClick={() => handlePlayAudio(detail.audio)}>
-                Play
-              </button>
-            ) : (
-              <button onClick={() => handlePauseAudio(detail.audio)}>
-                Stop
-              </button>
-            )}
+          <div
+            className='px-3 py-2 bg-gray-700 rounded-md text-sm'
+            onClick={() => handlePlayAudio(detail.audio)}
+          >
+            {isPlaying ? "Play" : "Pause"}
           </div>
           <motion.button
             className='px-3 py-2 bg-gray-700 rounded-md text-sm cursor-pointer disabled:bg-gray-500'
