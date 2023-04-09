@@ -6,7 +6,10 @@ import { DetailSurah, ListSurah, Params } from "@/types/DetailSurah";
 import Slider from "react-slick";
 import Image from "next/image";
 import Logo from "@/assets/logo.png";
-import { stringToHTML } from "@/helpers/ParsingData";
+import { convertDigitEntoArabic, stringToHTML } from "@/helpers/ParsingData";
+import { motion } from "framer-motion";
+import { useRouter } from "next/router";
+
 type Props = {
   detail?: DetailSurah;
 };
@@ -53,8 +56,8 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 };
 
 const DetailSurahPages = ({ detail }: Props) => {
-  const [first, setfirst] = useState(null);
-
+  const router = useRouter();
+  const [isPlaying, setIsPlaying] = useState<boolean>(true);
   if (!detail) {
     return <div>Loading...</div>;
   }
@@ -68,10 +71,38 @@ const DetailSurahPages = ({ detail }: Props) => {
     slidesToScroll: 1,
   };
 
+  const handleNext = (nomor: number) => {
+    if (nomor === 114) {
+      return;
+    }
+    router.push(`/quran/${nomor + 1}`);
+  };
+
+  const handlePrev = (nomor: number) => {
+    if (nomor === 1) {
+      return;
+    }
+    router.push(`/quran/${nomor - 1}`);
+  };
+
+  const handlePlayAudio = (audios: string) => {
+    const audio = new Audio(audios);
+    if (isPlaying) {
+      audio.play();
+    }
+  };
+
+  const handlePauseAudio = (audios: string) => {
+    const audio = new Audio(audios);
+    if (!isPlaying) {
+      audio.pause();
+    }
+  };
+
   return (
     <MainLayouts>
-      <div className='mx-auto bg-gray-800'>
-        <Slider {...settings} className='h-96'>
+      <div className='mx-auto bg-gray-800 w-full'>
+        <Slider {...settings} className='h-96 w-full'>
           <div className='flex flex-col items-center h-96 '>
             <div className='p-5 flex justify-around flex-row-reverse items-center h-full'>
               <div className='flex'>
@@ -96,10 +127,57 @@ const DetailSurahPages = ({ detail }: Props) => {
           </div>
         </Slider>
       </div>
-      <div className='flex flex-col max-w-6xl mx-auto p-5'>
+      <div className='flex flex-col max-w-6xl mx-auto p-5 gap-y-3 mt-5'>
+        <div className='flex justify-between text-white'>
+          <motion.button
+            onClick={() => handlePrev(detail.nomor)}
+            className='px-3 py-2 bg-gray-700 rounded-md text-sm disabled:bg-gray-500 cursor-pointer'
+            whileHover={{
+              scale: 1.1,
+            }}
+            disabled={detail.nomor === 1}
+            whileTap={{
+              scale: 0.9,
+              backgroundColor: "#67F6E7",
+              border: "none",
+              color: "#000",
+            }}
+          >
+            Previous
+          </motion.button>
+          <div className='px-3 py-2 bg-gray-700 rounded-md text-sm'>
+            {isPlaying ? (
+              <button onClick={() => handlePlayAudio(detail.audio)}>
+                Play
+              </button>
+            ) : (
+              <button onClick={() => handlePauseAudio(detail.audio)}>
+                Stop
+              </button>
+            )}
+          </div>
+          <motion.button
+            className='px-3 py-2 bg-gray-700 rounded-md text-sm cursor-pointer disabled:bg-gray-500'
+            whileHover={{
+              scale: 1.1,
+            }}
+            disabled={detail.nomor === 114}
+            whileTap={{
+              scale: 0.9,
+              backgroundColor: "#67F6E7",
+              border: "none",
+              color: "#000",
+            }}
+            onClick={() => handleNext(detail.nomor)}
+          >
+            Next
+          </motion.button>
+        </div>
         {detail.ayat.map((ayat) => (
-          <div className='flex' key={ayat.nomor}>
-            <p>{ayat.nomor}</p>
+          <div
+            className='flex font-medium text-4xl gap-x-4 justify-center border p-5 shadow-lg rounded-lg'
+            key={ayat.nomor}
+          >
             <p>{ayat.ar}</p>
           </div>
         ))}
