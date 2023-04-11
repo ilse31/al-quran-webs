@@ -9,6 +9,7 @@ import Logo from "@/assets/logo.png";
 import { convertDigitEntoArabic, stringToHTML } from "@/helpers/ParsingData";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import AudioPlayer from "@/components/AudioPlayer";
 
 type Props = {
   detail?: DetailSurah;
@@ -99,8 +100,8 @@ const DetailSurahPages = ({ detail }: Props) => {
 
   return (
     <MainLayouts>
-      <div className='mx-auto bg-gray-800 w-full'>
-        <Slider {...settings} className='h-96 w-full'>
+      <div className='mx-auto bg-gray-800 '>
+        <Slider {...settings} className='h-96 '>
           <div className='flex flex-col items-center h-96 '>
             <div className='p-5 flex justify-around flex-row-reverse items-center h-full'>
               <div className='flex'>
@@ -129,26 +130,24 @@ const DetailSurahPages = ({ detail }: Props) => {
         <div className='flex justify-between text-white'>
           <motion.button
             onClick={() => handlePrev(detail.nomor)}
-            className='px-3 py-2 bg-gray-700 rounded-md text-sm disabled:bg-gray-500 cursor-pointer'
+            className='px-3 py-2 bg-gray-700 rounded-md text-sm cursor-pointer'
             whileHover={{
-              scale: 1.1,
+              scale: detail.nomor === 1 ? 1 : 1.1,
             }}
-            disabled={detail.nomor === 1}
             whileTap={{
-              scale: 0.9,
-              backgroundColor: "#67F6E7",
+              scale: detail.nomor === 1 ? 1 : 0.9,
+              backgroundColor: detail.nomor === 1 ? "#999" : "#67F6E7",
               border: "none",
               color: "#000",
+            }}
+            animate={{
+              backgroundColor: detail.nomor === 1 ? "#999" : "#333",
+              cursor: detail.nomor === 1 ? "not-allowed" : "pointer",
             }}
           >
             Previous
           </motion.button>
-          <div
-            className='px-3 py-2 bg-gray-700 rounded-md text-sm'
-            onClick={() => handlePlayAudio(detail.audio)}
-          >
-            {isPlaying ? "Play" : "Pause"}
-          </div>
+          <AudioPlayer src={detail.audio} />
           <motion.button
             className='px-3 py-2 bg-gray-700 rounded-md text-sm cursor-pointer disabled:bg-gray-500'
             whileHover={{

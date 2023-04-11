@@ -1,5 +1,5 @@
 import { AnimationNavbarData, NavbarData } from "@/constants/navbar";
-import { BiMenuAltLeft } from "react-icons/bi";
+import { BiMenuAltLeft, BiSearchAlt } from "react-icons/bi";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -23,7 +23,7 @@ const Navbar = () => {
     <nav className='bg-gray-800 fixed w-full z-10'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 '>
         <div className='flex justify-between h-16 items-center'>
-          <div className='flex'>
+          <div className='flex w-full'>
             <div className='flex-shrink-0 flex items-center'>
               <Image
                 className='block lg:hidden h-8 w-auto'
@@ -40,16 +40,18 @@ const Navbar = () => {
                 height={40}
               />
             </div>
-            <div className='hidden sm:ml-6 sm:flex sm:space-x-8 items-center'>
-              {NavbarData.map((item, index) => (
-                <Link
-                  href={item.link}
-                  key={index}
-                  className={`${isActive(item.link)} cursor-pointer`}
-                >
-                  {item.name}
-                </Link>
-              ))}
+            <div className='flex justify-between w-full'>
+              <div className='hidden sm:ml-6 sm:flex sm:space-x-8 items-center'>
+                {NavbarData.map((item, index) => (
+                  <Link
+                    href={item.link}
+                    key={index}
+                    className={`${isActive(item.link)} cursor-pointer`}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
           <div className='-mr-2 flex items-center sm:hidden'>
