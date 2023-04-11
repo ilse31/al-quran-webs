@@ -26,8 +26,10 @@ const Surah = ({ dataSurah }: Props) => {
     setShowOption(false);
   };
 
-  const filtered = dataSurah.filter((option) =>
-    option.nama_latin.toLowerCase().includes(searchTerms.toLowerCase())
+  const filtered = dataSurah.filter(
+    (option) =>
+      option.nama_latin.toLowerCase().includes(searchTerms.toLowerCase()) ||
+      option.nama.toLowerCase().includes(searchTerms.toLowerCase())
   );
 
   const handleDelete = () => {

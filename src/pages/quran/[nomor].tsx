@@ -6,10 +6,10 @@ import { DetailSurah, ListSurah, Params } from "@/types/DetailSurah";
 import Slider from "react-slick";
 import Image from "next/image";
 import Logo from "@/assets/logo.png";
-import { convertDigitEntoArabic, stringToHTML } from "@/helpers/ParsingData";
+import { stringToHTML } from "@/helpers/ParsingData";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-import AudioPlayer from "@/components/AudioPlayer";
+import { AudioPlayer } from "@/components";
 
 type Props = {
   detail?: DetailSurah;
