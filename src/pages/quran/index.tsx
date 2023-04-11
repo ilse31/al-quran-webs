@@ -63,7 +63,7 @@ const Surah = ({ dataSurah }: Props) => {
                 className=' py-2 text-gray-700 w-full border-none outline-none'
               />
 
-              {showOption && searchTerms.length >= 2 && (
+              {searchTerms && searchTerms.length >= 2 && (
                 <div className='flex items-center'>
                   <button
                     className='text-gray-700'
