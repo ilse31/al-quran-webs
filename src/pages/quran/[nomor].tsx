@@ -58,7 +58,9 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 
 const DetailSurahPages = ({ detail }: Props) => {
   const router = useRouter();
-  const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const audioRef = React.useRef<HTMLAudioElement>(null);
+  const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
+
   if (!detail) {
     return <div>Loading...</div>;
   }
@@ -76,6 +78,7 @@ const DetailSurahPages = ({ detail }: Props) => {
     if (nomor === 114) {
       return;
     }
+    setIsPlaying(false);
     router.push(`/quran/${nomor + 1}`);
   };
 
@@ -83,19 +86,8 @@ const DetailSurahPages = ({ detail }: Props) => {
     if (nomor === 1) {
       return;
     }
+    setIsPlaying(false);
     router.push(`/quran/${nomor - 1}`);
-  };
-
-  const handlePlayAudio = (audios: string) => {
-    const audio = new Audio(audios);
-
-    if (isPlaying) {
-      audio.play();
-      setIsPlaying(false);
-    } else {
-      audio.pause();
-      setIsPlaying(true);
-    }
   };
 
   return (
@@ -147,7 +139,12 @@ const DetailSurahPages = ({ detail }: Props) => {
           >
             Previous
           </motion.button>
-          <AudioPlayer src={detail.audio} />
+          <AudioPlayer
+            audioRef={audioRef}
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
+            src={detail.audio}
+          />
           <motion.button
             className='px-3 py-2 bg-gray-700 rounded-md text-sm cursor-pointer disabled:bg-gray-500'
             whileHover={{

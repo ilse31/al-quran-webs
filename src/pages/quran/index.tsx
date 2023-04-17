@@ -118,7 +118,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     props: {
       dataSurah,
     },
-    revalidate: 3600, //
   };
 };
 
