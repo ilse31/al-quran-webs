@@ -10,6 +10,7 @@ type Props = {
   totalAyat: number;
   arti: string;
   nama_latin: string;
+  handleClick: () => void;
 };
 
 const CardsSurah = (props: Props) => {
@@ -42,6 +43,9 @@ const CardsSurah = (props: Props) => {
         >
           Read More
         </Link>
+        <div className='cursor-pointer' onClick={props.handleClick}>
+          Save to Favorites
+        </div>
       </div>
     </motion.div>
   );

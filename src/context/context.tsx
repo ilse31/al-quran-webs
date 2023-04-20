@@ -14,11 +14,13 @@ export type Favorite = {
 
 export type FavoritesState = {
   favorites: Favorite[];
+  isFavorite: boolean;
 };
 
 // Inisialisasi state awal
 export const initialState: FavoritesState = {
   favorites: [],
+  isFavorite: false,
 };
 
 // Membuat tipe untuk action
@@ -30,23 +32,26 @@ type Action =
 function favoritesReducer(state: FavoritesState, action: Action) {
   switch (action.type) {
     case "ADD_FAVORITE":
-      // Jika buku belum ada di favorites, tambahkan ke favorites
       if (
-        !state.favorites.find(
+        state.favorites.find(
           (favorite) => favorite.nomor === action.payload.nomor
         )
       ) {
-        return { ...state, favorites: [...state.favorites, action.payload] };
+        console.log("sudah ada");
+        state.isFavorite = true;
+        return state;
       }
-      return state;
+      return {
+        ...state,
+        favorites: [...state.favorites, action.payload],
+      };
     case "REMOVE_FAVORITE":
-      // Filter buku yang akan dihapus dari favorites
-      const newFavorites = state.favorites.filter(
-        (favorite) => favorite.nomor !== action.payload
-      );
-      return { ...state, favorites: newFavorites };
-    default:
-      return state;
+      return {
+        ...state,
+        favorites: state.favorites.filter(
+          (favorite) => favorite.nomor !== action.payload
+        ),
+      };
   }
 }
 
@@ -80,15 +85,17 @@ export const FavoritesProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(favoritesReducer, initialState, () => {
     // Ambil data favorites dari local storage saat pertama kali rendering
     if (typeof window !== "undefined") {
-      const favorites = getLocalStorage("favorites");
-      return favorites ? { favorites: JSON.parse(favorites) } : initialState;
+      const favorites = localStorage.getItem("favorites");
+      return favorites
+        ? { ...initialState, favorites: JSON.parse(favorites) }
+        : initialState;
     } else {
       return initialState;
     }
   });
 
   useEffect(() => {
-    setLocalStorage("favorites", JSON.stringify(state.favorites));
+    localStorage.setItem("favorites", JSON.stringify(state.favorites));
   }, [state]);
 
   return (

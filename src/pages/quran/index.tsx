@@ -1,9 +1,10 @@
 import { CardsSurah } from "@/components";
+import { FavoritesContext } from "@/context/context";
 import MainLayouts from "@/layouts/MainLayouts";
 import api from "@/service/api";
 import { Quran } from "@/types/DataQuran";
 import { GetStaticProps } from "next";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 
 type Props = {
@@ -11,6 +12,7 @@ type Props = {
 };
 
 const Surah = ({ dataSurah }: Props) => {
+  const { state, dispatch } = useContext(FavoritesContext);
   const [searchTerms, setSearchTerms] = useState("");
   const [seelectedOption, setSelectedOption] = useState(null);
   const [showOption, setShowOption] = useState(false);
@@ -36,6 +38,11 @@ const Surah = ({ dataSurah }: Props) => {
     setSearchTerms("");
     setSelectedOption(null);
     setShowOption(false);
+  };
+
+  const handleAddFavorite = (surah: any) => {
+    dispatch({ type: "ADD_FAVORITE", payload: surah });
+    console.log(state.isFavorite);
   };
 
   return (
@@ -102,6 +109,7 @@ const Surah = ({ dataSurah }: Props) => {
                 title={surah.nama}
                 totalAyat={surah.jumlah_ayat}
                 desc={surah.deskripsi}
+                handleClick={() => handleAddFavorite(surah)}
               />
             </div>
           ))}
