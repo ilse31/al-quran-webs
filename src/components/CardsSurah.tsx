@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { htmlParser } from "@/helpers/ParsingData";
 import Link from "next/link";
+import { BsBookmarks, BsBookmarksFill } from "react-icons/bs";
 
 type Props = {
   number: number;
@@ -11,6 +12,7 @@ type Props = {
   arti: string;
   nama_latin: string;
   handleClick: () => void;
+  isFavorite: boolean;
 };
 
 const CardsSurah = (props: Props) => {
@@ -37,14 +39,19 @@ const CardsSurah = (props: Props) => {
         >
           {htmlParser(props.desc)}
         </p>
-        <Link
-          href={`quran/${props.number}`}
-          className='text-blue-500 inline-flex items-center mt-4'
-        >
-          Read More
-        </Link>
-        <div className='cursor-pointer' onClick={props.handleClick}>
-          Save to Favorites
+        <div className='flex justify-between'>
+          <Link
+            href={`quran/${props.number}`}
+            className='text-blue-500 inline-flex items-center mt-4'
+          >
+            Read More
+          </Link>
+          <div
+            className='cursor-pointer inline-flex items-center mt-4'
+            onClick={props.handleClick}
+          >
+            {props.isFavorite ? <BsBookmarks /> : <BsBookmarksFill />}
+          </div>
         </div>
       </div>
     </motion.div>

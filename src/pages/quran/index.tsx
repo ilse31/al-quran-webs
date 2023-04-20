@@ -1,5 +1,5 @@
 import { CardsSurah } from "@/components";
-import { FavoritesContext } from "@/context/context";
+import { FavoritesContext } from "@/context/FavoritesContext";
 import MainLayouts from "@/layouts/MainLayouts";
 import api from "@/service/api";
 import { Quran } from "@/types/DataQuran";
@@ -13,9 +13,11 @@ type Props = {
 
 const Surah = ({ dataSurah }: Props) => {
   const { state, dispatch } = useContext(FavoritesContext);
+  const { favorites } = state;
   const [searchTerms, setSearchTerms] = useState("");
   const [seelectedOption, setSelectedOption] = useState(null);
   const [showOption, setShowOption] = useState(false);
+  const [searchSelect, setSearchSelect] = useState("");
 
   const handleInputChange = (e: any) => {
     setSearchTerms(e.target.value);
@@ -30,9 +32,11 @@ const Surah = ({ dataSurah }: Props) => {
 
   const filtered = dataSurah.filter(
     (option) =>
+      option.tempat_turun.toLowerCase().includes(searchTerms.toLowerCase()) ||
       option.nama_latin.toLowerCase().includes(searchTerms.toLowerCase()) ||
       option.nama.toLowerCase().includes(searchTerms.toLowerCase())
   );
+  console.log(filtered);
 
   const handleDelete = () => {
     setSearchTerms("");
@@ -45,6 +49,11 @@ const Surah = ({ dataSurah }: Props) => {
     console.log(state.isFavorite);
   };
 
+  const handleSelect = (e: any) => {
+    setSearchSelect(e.target.value);
+    console.log(searchSelect);
+  };
+
   return (
     <MainLayouts desc='Ayo Baca Quran' title='Ayo Ibadah || Baca Al-Quran'>
       <div className='flex p-5 max-w-7xl mx-auto flex-col'>
@@ -52,12 +61,14 @@ const Surah = ({ dataSurah }: Props) => {
           <div className='flex border rounded-md px-3 py-2 md:w-1/4 w-full'>
             <div className='flex items-center w-full'>
               <select
+                onChange={handleInputChange}
                 name='filter-select'
+                value={searchTerms}
                 className='outline-none w-full'
-                id=''
               >
-                <option value=''>City</option>
-                <option value=''>City</option>
+                <option value=''>Filter</option>
+                <option value='mekah'>Mekah</option>
+                <option value='madinah'>Madinah</option>
               </select>
             </div>
           </div>
@@ -103,6 +114,7 @@ const Surah = ({ dataSurah }: Props) => {
           {filtered.map((surah) => (
             <div key={surah.nomor}>
               <CardsSurah
+                isFavorite={state.isFavorite}
                 arti={surah.arti}
                 nama_latin={surah.nama_latin}
                 number={surah.nomor}

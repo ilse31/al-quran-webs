@@ -1,4 +1,3 @@
-import { getLocalStorage } from "@/helpers/storage";
 import React, { createContext, useContext, useReducer, useEffect } from "react";
 
 // Membuat tipe untuk state favorites
