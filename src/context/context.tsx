@@ -1,3 +1,4 @@
+import { getLocalStorage, setLocalStorage } from "@/helpers/storage";
 import React, { createContext, useContext, useReducer, useEffect } from "react";
 
 // Membuat tipe untuk state favorites
@@ -70,7 +71,7 @@ export const FavoritesProvider: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       console.log("You are on the browser");
-      console.log(localStorage.getItem("name"));
+      console.log(getLocalStorage("favorites"));
     } else {
       console.log("You are on the server");
       // 👉️ can't use localStorage
@@ -79,7 +80,7 @@ export const FavoritesProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(favoritesReducer, initialState, () => {
     // Ambil data favorites dari local storage saat pertama kali rendering
     if (typeof window !== "undefined") {
-      const favorites = localStorage.getItem("favorites");
+      const favorites = getLocalStorage("favorites");
       return favorites ? { favorites: JSON.parse(favorites) } : initialState;
     } else {
       return initialState;
@@ -87,7 +88,7 @@ export const FavoritesProvider: React.FC<Props> = ({ children }) => {
   });
 
   useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(state.favorites));
+    setLocalStorage("favorites", JSON.stringify(state.favorites));
   }, [state]);
 
   return (
