@@ -76,10 +76,8 @@ export const FavoritesProvider: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       console.log("You are on the browser");
-      console.log(getLocalStorage("favorites"));
     } else {
-      console.log("You are on the server");
-      // 👉️ can't use localStorage
+      console.log("You are on the server, 👉️ can't use localStorage");
     }
   }, []);
   const [state, dispatch] = useReducer(favoritesReducer, initialState, () => {
