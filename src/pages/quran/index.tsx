@@ -57,6 +57,7 @@ const Surah = ({ dataSurah }: Props) => {
         payload: surah,
       });
     }
+    console.log(favorites);
   };
 
   return (
