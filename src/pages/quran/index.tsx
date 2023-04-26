@@ -43,7 +43,10 @@ const Surah = ({ dataSurah }: Props) => {
   };
 
   const handleAddFavorite = (surah: any) => {
-    if (favorites.some((favorite) => favorite.nomor === surah.nomor)) {
+    if (
+      favorites &&
+      favorites.find((item: any) => item.nomor === surah.nomor)
+    ) {
       dispatch({
         type: "REMOVE_FAVORITE",
         payload: surah.nomor,

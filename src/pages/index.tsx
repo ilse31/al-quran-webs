@@ -9,7 +9,8 @@ export default function Home() {
     <>
       <MainLayouts desc='Ayo Ibadah Apps' title='Ayo Ibadah'>
         <div className='h-screen flex justify-center items-center'>
-          Halaman masih dalam tahap pengembangan 🚧 🚧 🚧 {favorites.length}
+          Halaman masih dalam tahap pengembangan 🚧 🚧 🚧{" "}
+          {favorites && favorites ? favorites.length : 0}
         </div>
       </MainLayouts>
     </>
