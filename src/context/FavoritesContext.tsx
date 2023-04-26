@@ -18,9 +18,10 @@ export type FavoritesState = {
 
 // Inisialisasi state awal
 export const initialState: FavoritesState = {
-  favorites: localStorage.getItem("favorites")
-    ? JSON.parse(localStorage.getItem("favorites") as any)
-    : [],
+  favorites:
+    typeof window !== "undefined" && localStorage.getItem("favorites")
+      ? JSON.parse(localStorage.getItem("favorites") as any)
+      : [],
   IsFavorite: false,
 };
 // Membuat tipe untuk action
