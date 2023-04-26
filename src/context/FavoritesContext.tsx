@@ -97,7 +97,9 @@ export const FavoritesProvider: React.FC<Props> = ({ children }) => {
   });
 
   useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(state.favorites));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("favorites", JSON.stringify(state));
+    }
   }, [state]);
 
   return (
