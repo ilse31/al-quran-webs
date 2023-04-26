@@ -36,7 +36,6 @@ const Surah = ({ dataSurah }: Props) => {
       option.nama_latin.toLowerCase().includes(searchTerms.toLowerCase()) ||
       option.nama.toLowerCase().includes(searchTerms.toLowerCase())
   );
-  console.log(filtered);
 
   const handleDelete = () => {
     setSearchTerms("");
@@ -46,7 +45,6 @@ const Surah = ({ dataSurah }: Props) => {
 
   const handleAddFavorite = (surah: any) => {
     dispatch({ type: "ADD_FAVORITE", payload: surah });
-    console.log(state.isFavorite);
   };
 
   const handleSelect = (e: any) => {
@@ -114,7 +112,6 @@ const Surah = ({ dataSurah }: Props) => {
           {filtered.map((surah) => (
             <div key={surah.nomor}>
               <CardsSurah
-                isFavorite={state.isFavorite}
                 arti={surah.arti}
                 nama_latin={surah.nama_latin}
                 number={surah.nomor}

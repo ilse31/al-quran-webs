@@ -12,7 +12,6 @@ type Props = {
   arti: string;
   nama_latin: string;
   handleClick: () => void;
-  isFavorite: boolean;
 };
 
 const CardsSurah = (props: Props) => {
@@ -46,12 +45,6 @@ const CardsSurah = (props: Props) => {
           >
             Read More
           </Link>
-          <div
-            className='cursor-pointer inline-flex items-center mt-4'
-            onClick={props.handleClick}
-          >
-            {props.isFavorite ? <BsBookmarks /> : <BsBookmarksFill />}
-          </div>
         </div>
       </div>
     </motion.div>
