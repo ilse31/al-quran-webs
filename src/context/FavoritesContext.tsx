@@ -18,10 +18,11 @@ export type FavoritesState = {
 
 // Inisialisasi state awal
 export const initialState: FavoritesState = {
-  favorites: [],
+  favorites: localStorage.getItem("favorites")
+    ? JSON.parse(localStorage.getItem("favorites") as any)
+    : [],
   IsFavorite: false,
 };
-
 // Membuat tipe untuk action
 type Action =
   | { type: "ADD_FAVORITE"; payload: Favorite }
