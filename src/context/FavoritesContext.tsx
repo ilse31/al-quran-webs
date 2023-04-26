@@ -85,7 +85,12 @@ export const FavoritesProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(favoritesReducer, initialState, () => {
     if (typeof window !== "undefined") {
       const localData = localStorage.getItem("favorites");
-      return localData !== null ? JSON.parse(localData) : initialState;
+      try {
+        return localData ? JSON.parse(localData) : initialState;
+      } catch (error) {
+        console.error("Error parsing favorites data from localStorage", error);
+        return initialState;
+      }
     } else {
       return initialState;
     }

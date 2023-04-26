@@ -8,20 +8,12 @@ const NavbarData = [
     link: "/quran",
   },
   {
-    name: "Hadits",
-    link: "/hadits",
+    name: "Hadist",
+    link: "/hadist",
   },
   {
     name: "Doa",
     link: "/doa",
-  },
-  {
-    name: "Tasbih",
-    link: "/tasbih",
-  },
-  {
-    name: "Tahlil",
-    link: "/tahlil",
   },
 ];
 
