@@ -1,5 +1,6 @@
 import { CardsSurah } from "@/components";
 import { FavoritesContext } from "@/context/FavoritesContext";
+import { getLocalStorage } from "@/helpers/storage";
 import MainLayouts from "@/layouts/MainLayouts";
 import api from "@/service/api";
 import { Quran } from "@/types/DataQuran";
@@ -17,7 +18,8 @@ const Surah = ({ dataSurah }: Props) => {
   const [searchTerms, setSearchTerms] = useState("");
   const [seelectedOption, setSelectedOption] = useState(null);
   const [showOption, setShowOption] = useState(false);
-  const [searchSelect, setSearchSelect] = useState("");
+
+  const total = getLocalStorage("favorites");
 
   const handleInputChange = (e: any) => {
     setSearchTerms(e.target.value);
@@ -56,20 +58,12 @@ const Surah = ({ dataSurah }: Props) => {
     }
   };
 
-  const handleSelect = (e: any) => {
-    setSearchSelect(e.target.value);
-    console.log(searchSelect);
-  };
-
   return (
     <MainLayouts desc='Ayo Baca Quran' title='Ayo Ibadah || Baca Al-Quran'>
       <div className='flex p-5 max-w-7xl mx-auto flex-col'>
         <div className='flex flex-col md:flex-row items-center justify-between flex-wrap'>
           <div className='flex border rounded-md px-3 py-2 md:w-1/4 w-full'>
-            Favorit :{" "}
-            {localStorage.getItem("favorites")
-              ? JSON.parse(localStorage.getItem("favorites") || "")?.length
-              : 0}
+            Favorit : {total.length}
           </div>
           <div className='flex border rounded-md md:w-1/4 w-full px-3'>
             <div className='flex items-center w-full'>
