@@ -66,7 +66,10 @@ const Surah = ({ dataSurah }: Props) => {
       <div className='flex p-5 max-w-7xl mx-auto flex-col'>
         <div className='flex flex-col md:flex-row items-center justify-between flex-wrap'>
           <div className='flex border rounded-md px-3 py-2 md:w-1/4 w-full'>
-            Favorit :
+            Favorit :{" "}
+            {localStorage.getItem("favorites")
+              ? JSON.parse(localStorage.getItem("favorites") || "")?.length
+              : 0}
           </div>
           <div className='flex border rounded-md md:w-1/4 w-full px-3'>
             <div className='flex items-center w-full'>
