@@ -6,7 +6,7 @@ import { DetailSurah, ListSurah, Params } from "@/types/DetailSurah";
 import Slider from "react-slick";
 import Image from "next/image";
 import Logo from "@/assets/logo.png";
-import { stringToHTML } from "@/helpers/ParsingData";
+import { ConvertToArabicNumbers, stringToHTML } from "@/helpers/ParsingData";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { AudioPlayer } from "@/components";
@@ -164,10 +164,15 @@ const DetailSurahPages = ({ detail }: Props) => {
         </div>
         {detail.ayat.map((ayat) => (
           <div
-            className='flex font-medium text-4xl gap-x-4 justify-center border p-5 shadow-lg rounded-lg'
+            className='flex font-medium text-3xl gap-x-4 justify-end border p-5 shadow-lg rounded-lg'
             key={ayat.nomor}
           >
-            <p>{ayat.ar}</p>
+            <div>
+              {ayat.ar}
+              <span className='px-5 py-3 mr-4 rounded-full border text-xl'>
+                {ConvertToArabicNumbers(ayat.nomor)}
+              </span>
+            </div>
           </div>
         ))}
       </div>
