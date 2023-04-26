@@ -12,6 +12,7 @@ type Props = {
   arti: string;
   nama_latin: string;
   handleClick: () => void;
+  IsFavorites: boolean;
 };
 
 const CardsSurah = (props: Props) => {
@@ -38,13 +39,20 @@ const CardsSurah = (props: Props) => {
         >
           {htmlParser(props.desc)}
         </p>
-        <div className='flex justify-between'>
+        <div className='flex justify-between flex-row'>
           <Link
             href={`quran/${props.number}`}
-            className='text-blue-500 inline-flex items-center mt-4'
+            className='text-blue-500 pr-5 py-2 inline-flex items-center'
           >
             Read More
           </Link>
+          <button className='text-gray-700' onClick={() => props.handleClick()}>
+            {props.IsFavorites ? (
+              <BsBookmarksFill className='text-2xl' />
+            ) : (
+              <BsBookmarks className='text-2xl' />
+            )}
+          </button>
         </div>
       </div>
     </motion.div>

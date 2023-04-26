@@ -32,7 +32,7 @@ const Surah = ({ dataSurah }: Props) => {
 
   const filtered = dataSurah.filter(
     (option) =>
-      option.tempat_turun.toLowerCase().includes(searchTerms.toLowerCase()) ||
+      option.tempat_turun.toLowerCase().includes(searchSelect.toLowerCase()) ||
       option.nama_latin.toLowerCase().includes(searchTerms.toLowerCase()) ||
       option.nama.toLowerCase().includes(searchTerms.toLowerCase())
   );
@@ -44,7 +44,17 @@ const Surah = ({ dataSurah }: Props) => {
   };
 
   const handleAddFavorite = (surah: any) => {
-    dispatch({ type: "ADD_FAVORITE", payload: surah });
+    if (favorites.some((favorite) => favorite.nomor === surah.nomor)) {
+      dispatch({
+        type: "REMOVE_FAVORITE",
+        payload: surah.nomor,
+      });
+    } else {
+      dispatch({
+        type: "ADD_FAVORITE",
+        payload: surah,
+      });
+    }
   };
 
   const handleSelect = (e: any) => {
@@ -59,12 +69,11 @@ const Surah = ({ dataSurah }: Props) => {
           <div className='flex border rounded-md px-3 py-2 md:w-1/4 w-full'>
             <div className='flex items-center w-full'>
               <select
-                onChange={handleInputChange}
+                onChange={(e) => setSearchSelect(e.target.value)}
                 name='filter-select'
-                value={searchTerms}
+                value={searchSelect}
                 className='outline-none w-full'
               >
-                <option value=''>Filter</option>
                 <option value='mekah'>Mekah</option>
                 <option value='madinah'>Madinah</option>
               </select>
@@ -112,6 +121,10 @@ const Surah = ({ dataSurah }: Props) => {
           {filtered.map((surah) => (
             <div key={surah.nomor}>
               <CardsSurah
+                IsFavorites={
+                  favorites &&
+                  favorites.some((favorite) => favorite.nomor === surah.nomor)
+                }
                 arti={surah.arti}
                 nama_latin={surah.nama_latin}
                 number={surah.nomor}

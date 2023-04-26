@@ -13,11 +13,13 @@ export type Favorite = {
 
 export type FavoritesState = {
   favorites: Favorite[];
+  IsFavorite: boolean;
 };
 
 // Inisialisasi state awal
 export const initialState: FavoritesState = {
   favorites: [],
+  IsFavorite: false,
 };
 
 // Membuat tipe untuk action
@@ -42,6 +44,7 @@ function favoritesReducer(
       return {
         ...state,
         favorites: [...state.favorites, action.payload],
+        IsFavorite: true,
       };
     case "REMOVE_FAVORITE":
       return {
@@ -49,6 +52,7 @@ function favoritesReducer(
         favorites: state.favorites.filter(
           (favorite) => favorite.nomor !== action.payload
         ),
+        IsFavorite: false,
       };
   }
 }
@@ -81,7 +85,7 @@ export const FavoritesProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(favoritesReducer, initialState, () => {
     if (typeof window !== "undefined") {
       const localData = localStorage.getItem("favorites");
-      return localData ? JSON.parse(localData) : initialState;
+      return localData && localData ? JSON.parse(localData) : initialState;
     } else {
       return initialState;
     }
