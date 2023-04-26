@@ -32,7 +32,6 @@ const Surah = ({ dataSurah }: Props) => {
 
   const filtered = dataSurah.filter(
     (option) =>
-      option.tempat_turun.toLowerCase().includes(searchSelect.toLowerCase()) ||
       option.nama_latin.toLowerCase().includes(searchTerms.toLowerCase()) ||
       option.nama.toLowerCase().includes(searchTerms.toLowerCase())
   );
@@ -67,17 +66,7 @@ const Surah = ({ dataSurah }: Props) => {
       <div className='flex p-5 max-w-7xl mx-auto flex-col'>
         <div className='flex flex-col md:flex-row items-center justify-between flex-wrap'>
           <div className='flex border rounded-md px-3 py-2 md:w-1/4 w-full'>
-            <div className='flex items-center w-full'>
-              <select
-                onChange={(e) => setSearchSelect(e.target.value)}
-                name='filter-select'
-                value={searchSelect}
-                className='outline-none w-full'
-              >
-                <option value='mekah'>Mekah</option>
-                <option value='madinah'>Madinah</option>
-              </select>
-            </div>
+            Favorit : {favorites.length}
           </div>
           <div className='flex border rounded-md md:w-1/4 w-full px-3'>
             <div className='flex items-center w-full'>
