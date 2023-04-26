@@ -93,20 +93,20 @@ const DetailSurahPages = ({ detail }: Props) => {
   return (
     <MainLayouts>
       <div className='mx-auto bg-gray-800 '>
-        <Slider {...settings} className='h-96 '>
-          <div className='flex flex-col items-center h-96 '>
-            <div className='p-5 flex justify-around flex-row-reverse items-center h-full'>
+        <Slider {...settings} className='h-auto '>
+          <div className='flex flex-col items-center h-auto '>
+            <div className='p-5 flex justify-around md:flex-row-reverse flex-col items-center h-full'>
               <div className='flex'>
                 <Image src={Logo} alt='alquran' width={200} />
               </div>
-              <div className='font-poppins text-white'>
+              <div className='font-poppins text-white flex flex-col items-center mt-10'>
                 <h1 className='text-6xl font-bold'>{detail.nama}</h1>
                 <h1 className='text-4xl font-normal'>{detail.nama_latin}</h1>
                 <h1 className='text-4xl font-light'>{detail.arti}</h1>
               </div>
             </div>
           </div>
-          <div className='flex flex-col items-center h-96 text-white'>
+          <div className='flex flex-col items-center h-auto text-white'>
             <div className='p-5 flex flex-col h-full max-w-6xl mx-auto'>
               <h1 className='text-4xl font-normal text-center'>
                 {detail.nama_latin}
